@@ -11,6 +11,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Group> Groups { get; set; }
-    public DbSet<StudentHistory> StudentHistories { get; set; }
+    public DbSet<StudentHistory> StudentHistory { get; set; }
 
 }

@@ -22,24 +22,24 @@ namespace API.Controllers
 
         // GET: api/StudentHistory
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentHistory>>> GetStudentHistories()
+        public async Task<ActionResult<IEnumerable<StudentHistory>>> GetStudentHistory()
         {
-          if (_context.StudentHistories == null)
-          {
-              return NotFound();
-          }
-            return await _context.StudentHistories.ToListAsync();
+            if (_context.StudentHistory == null)
+            {
+                return NotFound();
+            }
+            return await _context.StudentHistory.ToListAsync();
         }
 
         // GET: api/StudentHistory/5
         [HttpGet("{id}")]
         public async Task<ActionResult<StudentHistory>> GetStudentHistory(int id)
         {
-          if (_context.StudentHistories == null)
-          {
-              return NotFound();
-          }
-            var studentHistory = await _context.StudentHistories.FindAsync(id);
+            if (_context.StudentHistory == null)
+            {
+                return NotFound();
+            }
+            var studentHistory = await _context.StudentHistory.FindAsync(id);
 
             if (studentHistory == null)
             {
@@ -85,11 +85,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<StudentHistory>> PostStudentHistory(StudentHistory studentHistory)
         {
-          if (_context.StudentHistories == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.StudentHistories'  is null.");
-          }
-            _context.StudentHistories.Add(studentHistory);
+            if (_context.StudentHistory == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.StudentHistory'  is null.");
+            }
+            _context.StudentHistory.Add(studentHistory);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudentHistory", new { id = studentHistory.Id }, studentHistory);
@@ -99,17 +99,17 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudentHistory(int id)
         {
-            if (_context.StudentHistories == null)
+            if (_context.StudentHistory == null)
             {
                 return NotFound();
             }
-            var studentHistory = await _context.StudentHistories.FindAsync(id);
+            var studentHistory = await _context.StudentHistory.FindAsync(id);
             if (studentHistory == null)
             {
                 return NotFound();
             }
 
-            _context.StudentHistories.Remove(studentHistory);
+            _context.StudentHistory.Remove(studentHistory);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace API.Controllers
 
         private bool StudentHistoryExists(int id)
         {
-            return (_context.StudentHistories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.StudentHistory?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
